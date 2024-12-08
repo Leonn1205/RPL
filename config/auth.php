@@ -43,17 +43,17 @@ return [
 
     'admin' => [
         'driver' => 'session',
-        'provider' => 'admins',  // Provider untuk admin
+        'provider' => 'admin',  // Provider untuk admin
     ],
 
-    'adminpayrollperusahaan' => [
+    'admin_payroll_perusahaan' => [
         'driver' => 'session',
-        'provider' => 'adminpayrollperusahaans',  // Provider untuk admin payroll perusahaan
+        'provider' => 'admin_payroll_perusahaan',  // Provider untuk admin payroll perusahaan
     ],
 
-    'payrolladmin' => [
+    'payroll_admin' => [
         'driver' => 'session',
-        'provider' => 'payrolladmins',  // Provider untuk payroll admin
+        'provider' => 'payroll_admin',  // Provider untuk payroll admin
     ],
 ],
 
@@ -77,22 +77,22 @@ return [
     'providers' => [
     'users' => [
         'driver' => 'eloquent',
-        'model' => App\Models\User::class,  // Model untuk pengguna
+        'model' => App\Models\User::class,  
     ],
 
-    'admins' => [
+    'admin' => [
         'driver' => 'eloquent',
-        'model' => App\Models\Admin::class,  // Model untuk admin
+        'model' => App\Models\Admin::class,  
     ],
 
-    'adminpayrollperusahaans' => [
+    'admin_payroll_perusahaan' => [
         'driver' => 'eloquent',
-        'model' => App\Models\AdminPayrollPerusahaan::class,  // Model untuk admin payroll perusahaan
+        'model' => App\Models\AdminPayrollPerusahaan::class,  
     ],
 
-    'payrolladmins' => [
+    'payroll_admin' => [
         'driver' => 'eloquent',
-        'model' => App\Models\PayrollAdmin::class,  // Model untuk payroll admin
+        'model' => App\Models\PayrollAdmin::class,  
     ],
 ],
 

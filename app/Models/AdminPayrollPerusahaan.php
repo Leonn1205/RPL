@@ -14,4 +14,5 @@ class AdminPayrollPerusahaan extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = ['username', 'password'];
+    protected $hidden = ['password'];
 }

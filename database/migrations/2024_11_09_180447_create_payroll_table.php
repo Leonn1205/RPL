@@ -27,7 +27,6 @@ class CreatePayrollTable extends Migration
             $table->bigInteger('jumlah_sisa_dana_di_bank');
             $table->string('nama_karyawan', 50);
             $table->string('jabatan', 20);
-            $table->string('departemen', 20);
             $table->decimal('gaji_pokok', 10, 2);
             $table->decimal('tunjangan_jabatan', 10, 2);
             $table->decimal('lembur', 10, 2);
@@ -38,7 +37,6 @@ class CreatePayrollTable extends Migration
             $table->decimal('jmlh_gaji', 10, 2);
             $table->string('nama_bank', 15);
             $table->string('no_rekening', 20);
-            $table->string('nama_pemilik', 50);
             $table->date('tgl_penggajian');
             $table->string('stat_transaksi', 50);
             $table->timestamp('tgl_buat')->useCurrent();

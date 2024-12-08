@@ -11,7 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Id Karyawan</th>
                     <th>Nama Karyawan</th>
                     <th>Jabatan</th>
                     <th>Gaji Pokok</th>

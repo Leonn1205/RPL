@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 class AdminPayrollPerusahaanDashboardController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
         return view('adminpayrollperusahaan.dashboard'); 
     }

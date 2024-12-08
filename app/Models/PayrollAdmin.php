@@ -6,7 +6,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class PayrollAdmin extends Authenticatable
 {
-    protected $guard = 'payrolladmin';
     protected $table = 'payroll_admin';
     protected $primaryKey = 'id_payroll_admin';
 

@@ -20,7 +20,6 @@ class Admin extends Model
 
     protected $hidden = ['password'];
 
-    // Relasi ke perusahaan
     public function perusahaan()
     {
         return $this->hasOne(Perusahaan::class, 'id_admin', 'id_admin');

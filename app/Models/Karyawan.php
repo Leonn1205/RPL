@@ -14,11 +14,16 @@ class Karyawan extends Model
     public $timestamps = false; 
 
     protected $fillable = [
-        'id_perusahaan', 'nama_perusahaan', 'nama_karyawan', 'email', 'jabatan'
+        'nama_karyawan',
+        'email',
+        'jabatan',
+        'no_rekening',
+        'tanggal_penggajian',
+        'id_perusahaan',
     ];
 
     public function perusahaan()
     {
-        return $this->belongsTo(Perusahaan::class, 'id_perusahaan', 'id_perusahaan');
+        return $this->belongsTo(Perusahaan::class, 'id_perusahaan');
     }
 }

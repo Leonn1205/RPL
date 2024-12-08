@@ -17,7 +17,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Id Perusahaan</th>
                     <th>Nama Perusahaan</th>
                     <th>Alamat</th>
                     <th>Dana di Bank</th>

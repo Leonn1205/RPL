@@ -118,22 +118,32 @@
                     <input type="password" name="password" id="password" class="form-control" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-control" required>
+                        <option value="admin_payroll_perusahaan">Admin Payroll Perusahaan</option>
+                        <option value="admin">Admin</option>
+                        <option value="payroll_admin">Payroll Admin</option>
+                    </select>
+                </div>
+
+
                 <!-- Login Button -->
                 <div>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </div>
-                </form>
+            </form>
 
-                <!-- Menampilkan pesan error jika login gagal -->
-                @if ($errors->any())
-                    <div class="alert alert-danger mt-3">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            <!-- Menampilkan pesan error jika login gagal -->
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
         </div>
     </div>

@@ -21,9 +21,17 @@ class CreateKaryawanTable extends Migration
             $table->string('nama_karyawan', 50);
             $table->string('email', 50);
             $table->string('jabatan', 20);
+            $table->decimal('gaji_pokok', 10, 2);
+            $table->decimal('tunjangan_jabatan', 10, 2);
+            $table->decimal('lembur', 10, 2);
+            $table->decimal('uang_transportasi', 10, 2);
+            $table->decimal('uang_makan', 10, 2);
+            $table->decimal('bpjs_ketenagakerjaan', 10, 2);
+            $table->decimal('pph21', 10, 2);
+            $table->decimal('jmlh_gaji', 10, 2);
             $table->string('nama bank', 20);
             $table->string('no_rekening', 20);
-            $table->string('tanggal_penggajian', 20);
+            $table->date('tanggal_penggajian');
             $table->timestamp('tgl_buat')->useCurrent();
             $table->timestamp('tgl_update')->useCurrent()->useCurrentOnUpdate();
         });

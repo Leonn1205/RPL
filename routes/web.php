@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 // use App\Http\Controllers\AdminDashboardController;
 // use App\Http\Controllers\AdminPayrollPerusahaanDashboardController;
 // use App\Http\Controllers\PayrollAdminDashboardController;
@@ -9,6 +10,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\AdminKaryawanController;
+use App\Http\Controllers\AdminPayrollPerusahaanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,30 +25,36 @@ use App\Http\Controllers\TransaksiController;
 |
 */
 
-// Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-// Route::post('login', [AuthController::class, 'login']);
-// Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+// Rute untuk Admin Payroll Perusahaan
+Route::get('/dashboard/admin-payroll', [DashboardController::class, 'adminPayrollDashboard'])
+    ->middleware('auth:adminpayrollperusahaan');
+
+// Rute untuk Admin
+Route::get('/dashboard/admin', [DashboardController::class, 'adminDashboard'])
+    ->middleware('auth:admin');
+
+// Rute untuk Payroll Admin
+Route::get('/dashboard/payroll-admin', [DashboardController::class, 'payrollAdminDashboard'])
+    ->middleware('auth:payrolladmin');
 
 
-// // Admin
-// Route::middleware('auth:admin')->group(function () {
-//     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-// });
+Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
 
-// // Admin Payroll Perusahaan
-// Route::middleware('auth:adminpayrollperusahaan')->group(function () {
-//     Route::get('/adminpayrollperusahaan/dashboard', [AdminPayrollPerusahaanDashboardController::class, 'index'])->name('adminpayrollperusahaan.dashboard');
-// });
-
-// // Payroll Admin
-// Route::middleware('auth:payrolladmin')->group(function () {
-//     Route::get('/payrolladmin/dashboard', [PayrollAdminDashboardController::class, 'index'])->name('payrolladmin.dashboard');
-// });
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('perusahaan', PerusahaanController::class);
 Route::prefix('perusahaan/{perusahaanId}')->group(function () {
     Route::resource('karyawan', KaryawanController::class)->except(['show']);
 });
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
 Route::get('/transaksi/{id_perusahaan}/karyawan', [TransaksiController::class, 'showPayroll'])->name('transaksi.payroll');
+
+Route::prefix('admin-perusahaan/{perusahaan}')->group(function () {
+    Route::resource('adminkaryawan', AdminKaryawanController::class);
+});
+
+Route::prefix('admin-payroll/{perusahaan}')->group(function () {
+    Route::resource('adminperusahaan', AdminPayrollPerusahaanController::class);
+});

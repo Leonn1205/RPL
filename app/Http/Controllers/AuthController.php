@@ -20,47 +20,49 @@ class AuthController extends Controller
     // Menangani login pengguna
     public function login(Request $request)
     {
-        // Validasi input
-        $credentials = $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'role' => 'required|in:admin_payroll_perusahaan,admin,payroll_admin', // Pilih role
         ]);
 
-        $username = $credentials['username'];
-        $password = $credentials['password'];
+        $credentials = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
 
-        // Cek login untuk Admin
-        if ($admin = Admin::where('username', $username)->first()) {
-            if (Hash::check($password, $admin->password)) {
-                Auth::guard('admin')->login($admin);  // Login sebagai admin
-                return redirect()->route('admin.dashboard');
+        switch ($request->role) {
+            case 'admin_payroll_perusahaan':
+                $user = AdminPayrollPerusahaan::where('username', $request->username)->first();
+                break;
+            case 'admin':
+                $user = Admin::where('username', $request->username)->first();
+                break;
+            case 'payroll_admin':
+                $user = PayrollAdmin::where('username', $request->username)->first();
+                break;
+            default:
+                return back()->withErrors(['role' => 'Invalid role']);
+        }
+
+        if ($user && Auth::guard($request->role)->attempt($credentials)) {
+            if ($request->role == 'admin_payroll_perusahaan') {
+                return redirect()->route('adminperusahaan.index');
+            } elseif ($request->role == 'admin') {
+                return redirect()->route('adminkaryawan.index');
+            } elseif ($request->role == 'payroll_admin') {
+                return redirect()->route('perusahaan.index');
             }
         }
 
-        // Cek login untuk Admin Payroll Perusahaan
-        elseif ($adminPayrollPerusahaan = AdminPayrollPerusahaan::where('username', $username)->first()) {
-            if (Hash::check($password, $adminPayrollPerusahaan->password)) {
-                Auth::guard('adminpayrollperusahaan')->login($adminPayrollPerusahaan);
-                return redirect()->route('adminpayrollperusahaan.dashboard');
-            }
-        }
-
-        // Cek login untuk Payroll Admin
-        elseif ($payrollAdmin = PayrollAdmin::where('username', $username)->first()) {
-            if (Hash::check($password, $payrollAdmin->password)) {
-                Auth::guard('payrolladmin')->login($payrollAdmin);
-                return redirect()->route('payrolladmin.dashboard');
-            }
-        }
-
-        // Jika login gagal, kirimkan pesan error
-        return back()->withErrors(['username' => 'Invalid credentials.'])->withInput();
+        return back()->withErrors(['username' => 'Invalid credentials']);
     }
 
+
     // Menangani logout
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout(); // Logout pengguna
-        return redirect()->route('login');
+        Auth::guard($request->role)->logout();
+        return redirect('/');
     }
 }

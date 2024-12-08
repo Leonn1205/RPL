@@ -13,9 +13,9 @@ class KaryawanController extends Controller
     public function index($perusahaanId)
 {
     $perusahaan = Perusahaan::findOrFail($perusahaanId);
-    $karyawans = $perusahaan->karyawans;  
+    $karyawan = $perusahaan->karyawan;  
 
-    return view('karyawan.index', compact('karyawans', 'perusahaan'));
+    return view('karyawan.index', compact('karyawan', 'perusahaan'));
 }
 
 public function create($perusahaanId)
@@ -32,16 +32,21 @@ public function store(Request $request, $perusahaanId)
         'nama_karyawan' => 'required|max:50',
         'email' => 'required|email|max:50',
         'jabatan' => 'required|max:20',
+        'nama_bank' => 'required|max:20',  // Jika perlu
+        'no_rekening' => 'required|max:20',  // Jika perlu
+        'tanggal_penggajian' => 'required|date', // Jika perlu
     ]);
 
     $perusahaan = Perusahaan::findOrFail($perusahaanId);
 
     $karyawan = new Karyawan([
         'id_perusahaan' => $perusahaan->id_perusahaan,
-        'nama_perusahaan' => $perusahaan->nama_perusahaan,
         'nama_karyawan' => $request->nama_karyawan,
         'email' => $request->email,
         'jabatan' => $request->jabatan,
+        'nama_bank' => $request->nama_bank,  // Sesuaikan dengan inputan
+        'no_rekening' => $request->no_rekening,  // Sesuaikan dengan inputan
+        'tanggal_penggajian' => $request->tanggal_penggajian, // Sesuaikan dengan inputan
     ]);
 
     $karyawan->save();

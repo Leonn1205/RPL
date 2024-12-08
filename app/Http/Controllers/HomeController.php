@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
-        $perusahaans = Perusahaan::all(); 
-        return view('perusahaan.index', compact('perusahaans'));
+        
+        return view('home.dashboard');
     }
 }

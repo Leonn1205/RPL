@@ -30,9 +30,9 @@ class Perusahaan extends Model
         return $this->belongsTo(AdminPayrollPerusahaan::class, 'id_admin_payroll_perusahaan', 'id');
     }
 
-    public function karyawans()
+    public function karyawan()
     {
-        return $this->hasMany(Karyawan::class, 'id_perusahaan');
+        return $this->hasMany(Karyawan::class, 'id_perusahaan', 'id_perusahaan');
     }
 
     public function getJumlahDanaDiBankFormattedAttribute()
