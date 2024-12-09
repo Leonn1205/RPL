@@ -28,13 +28,6 @@ class CreatePayrollTable extends Migration
             $table->string('nama_karyawan', 50);
             $table->string('jabatan', 20);
             $table->decimal('gaji_pokok', 10, 2);
-            $table->decimal('tunjangan_jabatan', 10, 2);
-            $table->decimal('lembur', 10, 2);
-            $table->decimal('uang_transportasi', 10, 2);
-            $table->decimal('uang_makan', 10, 2);
-            $table->decimal('bpjs_ketenagakerjaan', 10, 2);
-            $table->decimal('pph21', 10, 2);
-            $table->decimal('jmlh_gaji', 10, 2);
             $table->string('nama_bank', 15);
             $table->string('no_rekening', 20);
             $table->date('tgl_penggajian');
